@@ -1,6 +1,8 @@
 ﻿using System.Data;
+using System.Globalization;
 using Producer.Console;
 using RabbitMQ.Client;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class Program
 {
@@ -58,16 +60,34 @@ internal class Program
         RabbitMQService.BindQueue(queueName: bindTestQueueName, exchangeName: bindTestExchangeName, routingKey: "sent_email");
 
 
-        Console.WriteLine("[**] Rabbitmq queues bind added.");
+        Console.WriteLine("[**] Rabbitmq queues binding completed.");
 
         #endregion
 
+        #region Publish Message
+
+        string publishTestExhangeName = "publish_test_exchange";
+        string publishTestQueueName = "publish_test_queue";
+        string publishTestRouteKey = "publish_test_route";
+
+        RabbitMQService.CreateExchange(exchangeName: publishTestExhangeName, exchangeType: ExchangeType.Direct);
+        RabbitMQService.CreateQueue(queueName: publishTestQueueName);
+        RabbitMQService.BindQueue(queueName: publishTestQueueName, exchangeName: publishTestExhangeName, publishTestRouteKey);
+
+        for (int i = 0; i < 100; i++)
+        {
+            string timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",CultureInfo.InvariantCulture);
+
+            RabbitMQService.Publish(exchangeName: publishTestExhangeName, routingKey: publishTestRouteKey, data: timestamp);
+
+            Console.WriteLine($"[**] Rabbitmq messages published. Message : {timestamp}");
+
+        }
+
+        Console.WriteLine($"[**] All rabbitmq messages published.");
 
 
-
-
-
-
+        #endregion
 
         Console.ReadKey();
     }

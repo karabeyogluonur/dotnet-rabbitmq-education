@@ -22,6 +22,13 @@ namespace Producer.Console
         {
 			channel.QueueBind(queue: queueName, exchange: exchangeName, routingKey: routingKey);
         }
+
+        public static void Publish(string exchangeName, string routingKey, object data)
+        {
+            var dataArray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data));
+
+            channel.BasicPublish(exchange: exchangeName, routingKey: routingKey, basicProperties: null, body: dataArray);
+        }
     }
 }
 
