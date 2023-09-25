@@ -17,6 +17,15 @@ namespace Producer.Console
             return connectionFactory.CreateConnection();
 		}
 
+        public static void CloseConnection(IConnection connection)
+        {
+            if (connection.IsOpen)
+            {
+                connection.Close();
+                connection.Dispose();
+            }               
+        }
+
 	}
 }
 
