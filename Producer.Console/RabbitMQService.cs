@@ -12,6 +12,10 @@ namespace Producer.Console
 		{
 			channel.ExchangeDeclare(exchange: exchangeName, type: exchangeType);
 		}
-	}
+        public static void CreateQueue(string queueName)
+        {
+			channel.QueueDeclare(queue: queueName, autoDelete: false, exclusive: false);
+        }
+    }
 }
 

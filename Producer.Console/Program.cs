@@ -36,6 +36,18 @@ Console.WriteLine("[**] Rabbitmq exchanges created.");
 
 #endregion
 
+#region Create Queues
+
+RabbitMQService.CreateQueue("Comment");
+RabbitMQService.CreateQueue("Payment");
+
+
+Console.WriteLine("[**] Rabbitmq queues created.");
+
+#endregion
+
+
+
 
 
 
