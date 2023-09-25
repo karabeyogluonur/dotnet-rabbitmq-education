@@ -1,0 +1,14 @@
+﻿using System;
+namespace Consumer.Console
+{
+	public class RabbitMQDefaults
+	{
+		public const string Prefix = "amqp://";
+		public const string Username = "guest";
+		public const string Password = "guest";
+		public const string Host = "localhost";
+		public const string Port = "5672";
+			
+	}
+}
+
