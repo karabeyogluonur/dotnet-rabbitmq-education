@@ -3,6 +3,11 @@ namespace OrderProducer.Console.Models
 {
 	public class OrderModel
 	{
+		public OrderModel()
+		{
+			Products = new List<ProductModel>();
+		}
+
 		public Guid Id { get; set; }
 		public string FirstName { get; set; } = String.Empty;
 		public string LastName { get; set; } = String.Empty;
