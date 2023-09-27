@@ -7,7 +7,7 @@ namespace Producer.Console
 		public const string Username = "guest";
 		public const string Password = "guest";
 		public const string Host = "localhost";
-		public const string Port = "5672";
+		public const int Port = 5672;
 			
 	}
 }
